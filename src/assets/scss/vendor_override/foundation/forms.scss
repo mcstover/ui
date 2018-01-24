@@ -1,0 +1,69 @@
+@import 'palette';
+
+$placeholder-color: $kiva-text-light;
+$placeholder-font-style: italic;
+
+::-webkit-input-placeholder { /* Chrome, Safari, Opera */
+	color: $placeholder-color;
+	font-style: $placeholder-font-style;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+	color: $placeholder-color;
+	font-style: $placeholder-font-style;
+	opacity: 1 !important;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+	color: $placeholder-color;
+	font-style: $placeholder-font-style;
+	opacity: 1 !important;
+}
+
+:-ms-input-placeholder { /* IE10-11 */
+	color: $placeholder-color !important;
+	font-style: $placeholder-font-style !important;
+}
+
+::-ms-input-placeholder { /* Edge */
+	color: $placeholder-color;
+	font-style: $placeholder-font-style;
+}
+
+::placeholder { /* CSS Working Draft */
+	color: $placeholder-color;
+	font-style: $placeholder-font-style;
+}
+
+input[type="submit"].hidden-submit {
+	position: absolute;
+	left: -9999px;
+	width: 1px;
+	height: 1px;
+}
+
+form .error {
+	input {
+		border-color: $red;
+	}
+
+	svg.icon-error {
+		fill: $red;
+		width: rem-calc(12);
+		height: rem-calc(12);
+		vertical-align: middle;
+		margin-right: 0.25rem;
+	}
+}
+
+.error label,
+.error label.error,
+label.error {
+	color: $kiva-text-dark;
+}
+
+select {
+	color: $kiva-text-dark;
+	border-color: $kiva-text-dark;
+	cursor: pointer;
+}

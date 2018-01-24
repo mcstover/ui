@@ -35,11 +35,13 @@ export default {
 @import 'global/line-breaks';
 
 // import global foundation components
+@import 'foundation/components/forms';
 @import 'foundation/components/grid';
 @import 'foundation/components/type';
 @import 'foundation/components/visibility';
 
 // import overrides
+@import 'vendor_override/foundation/forms';
 @import 'vendor_override/foundation/type';
 
 #app {
