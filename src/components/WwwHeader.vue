@@ -12,7 +12,7 @@
 				</dropdown-link>
 			</div>
 			<div class="small-1-8th large-1 xxlarge-1 columns" :class="{ 'show-for-large-up': isVisitor }">
-				<search-toggle controls="header-search-form" @toggle="open => searchOpen = open" class="header-button" />
+				<search-toggle controls="searchName" @toggle="open => searchOpen = open" class="header-button" />
 			</div>
 			<div class="columns header-column right-side" :class="[ isVisitor ? 'small-6 xx-large-3' : 'small-3-8ths xx-large-2' ]" >
 				<div v-if="isVisitor" class="small-6 large-4 columns">
@@ -34,7 +34,7 @@
 				</div>
 			</div>
 			<div class="search-container" :class="{ 'show-for-large-up': isVisitor }">
-				<search-form name="header-search-form" :open="searchOpen" />
+				<search-form :name="searchName" :open="searchOpen" />
 			</div>
 		</div>
 		<lend-menu-dropdown />
@@ -48,6 +48,7 @@
 				<router-link :to="item.url">{{item.label}}</router-link>
 			</li>
 		</dropdown-menu>
+		<search-results :owned-by="searchName" />
 	</header>
 </template>
 
@@ -59,6 +60,7 @@ import DropdownLink from '@/components/DropdownLink';
 import DropdownMenu from '@/components/DropdownMenu';
 import LendMenuDropdown from '@/components/LendMenuDropdown';
 import SearchForm from '@/components/SearchForm';
+import SearchResults from '@/components/SearchResults';
 import SearchToggle from '@/components/SearchToggle';
 import SvgIcon from '@/components/SvgIcon';
 
@@ -68,6 +70,7 @@ export default {
 		DropdownMenu,
 		LendMenuDropdown,
 		SearchForm,
+		SearchResults,
 		SearchToggle,
 		SvgIcon,
 	},
@@ -99,6 +102,7 @@ export default {
 				{ label: 'Sign out', url: '/portfolio' },
 			],
 			searchOpen: false,
+			searchName: 'header-search-form'
 		};
 	},
 	computed: {
@@ -275,9 +279,10 @@ $search-input-padding-small: $search-margin-small;
 		line-height: $header-height;
 	}
 
-	&:link, &:visited, &:hover, &:active {
+	&:link, &:visited, &:hover, &:active, &:focus {
 		color: $white;
 		text-decoration: none;
+		background-color: $kiva-green;
 
 		.icon {
 			fill: $white;
