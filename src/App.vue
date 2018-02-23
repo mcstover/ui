@@ -41,8 +41,8 @@ export default {
 // import global foundation components
 @include foundation-global-styles;
 // @include foundation-flex-classes;
-// @include foundation-flex-grid;
-@include foundation-xy-grid-classes;
+@include foundation-flex-grid;
+//@include foundation-xy-grid-classes;
 @include foundation-visibility-classes;
 // @include foundation-typography;
 // @include foundation-visibility;
