@@ -13,7 +13,7 @@
 			</div>
 			<p>
 				Lending through Kiva involves risk of principal loss. Kiva does not guarantee repayment or offer a financial return on your loan.
-				<br/>
+				<br/><br/>
 				&copy; {{year}} Kiva. All rights reserved.
 			</p>
 		</nav>
@@ -100,25 +100,15 @@ export default {
 <style lang="scss">
 @import 'settings';
 
-@mixin left-line {
-	padding-left: 0.5rem;
-	border-left: 1px solid $white;
-	margin-left: 0.5rem;
-}
-
-@mixin no-left-line {
-	padding-left: 0;
-	border-left: none;
-	margin-left: 0;
-}
+$footer-link-separator-color: $light-green;
 
 .www-footer {
-	background-color: $dark-green;
+	background-color: $kiva-green;
 	color: $white;
 	font-size: $small-font-size;
 	line-height: $small-line-height;
 	text-align: center;
-	padding: 1rem;
+	padding: 1.5rem 1rem;
 
 	@media #{$medium-up} {
 		padding: rem-calc(40);
@@ -141,18 +131,13 @@ export default {
 	}
 
 	a {
-		color: $light-green;
+		color: $dark-green;
 		font-size: $small-font-size;
 		line-height: $small-line-height;
 
 		&:visited,
 		&:active {
-			color: $light-green;
-		}
-
-		@media #{$medium-only} {
-			font-size: $body-font-size;
-			line-height: $body-line-height;
+			color: $dark-green;
 		}
 	}
 
@@ -169,7 +154,27 @@ export default {
 			display: flex;
 			justify-content: space-between;
 			margin: 0 0 1rem;
-			border-bottom: 1px solid $kiva-stroke-gray;
+			border-bottom: 1px solid $footer-link-separator-color;
+
+			li {
+				margin: 0 0 1rem;
+			}
+
+			a {
+				@media #{$medium-only} {
+					font-size: $body-font-size;
+					line-height: $body-line-height;
+				}
+			}
+		}
+
+		div {
+			margin-bottom: 2rem;
+			color: $footer-link-separator-color;
+
+			a {
+				margin: 0 0.75rem;
+			}
 		}
 	}
 
@@ -190,110 +195,24 @@ export default {
 	}
 
 	.work-with-us {
-		a {
-			@include left-line;
+		$spacing: 0.5rem;
 
+		a {
+			padding-left: $spacing;
+			border-left: 1px solid $footer-link-separator-color;
+			margin-left: $spacing;
 			white-space: nowrap;
+		}
+
+		ul {
+			overflow: hidden;
+			width: calc(100% + #{$spacing * 2} + 1px);
 		}
 
 		li {
 			display: inline-block;
 			float: left;
-
-			&:first-child a {
-				@include no-left-line;
-			}
-
-			&:nth-child(3) {
-				clear: both;
-
-				a {
-					@include no-left-line;
-				}
-			}
-		}
-	}
-}
-
-@media #{$small-only}, #{$medium-only} {
-	.www-footer {
-		padding: 1rem;
-	}
-
-	.siteFooter-nav {
-		.siteFooter-links {
-			border-bottom: white 1px solid;
-			list-style-type: none;
-			margin-left: 0;
-			padding-bottom: rem-calc(40);
-			text-align: center;
-
-			> li {
-				float: left;
-			}
-		}
-
-		li:first-of-type {
-			text-align: left;
-		}
-
-		li:last-of-type {
-			text-align: right;
-		}
-
-		.siteFooter-policy {
-			text-align: center;
-			margin-bottom: rem-calc(40);
-		}
-
-		.siteFooter-legal {
-			text-align: center;
-		}
-
-		.siteFooter-privacy {
-			border-right: $white 1px solid;
-			padding-right: rem-calc(20);
-			margin-right: rem-calc(13);
-		}
-	}
-}
-
-@media #{$xxlarge-up} {
-	.www-footer .work-with-us li:nth-child(3) {
-		clear: none;
-
-		a {
-			@include left-line;
-		}
-	}
-}
-
-@media only screen and (min-width: 681px) and (max-width: 721px) {
-	.www-footer .work-with-us li:nth-child(5) {
-		clear: both;
-
-		a {
-			@include no-left-line;
-		}
-	}
-}
-
-@media only screen and (min-width: 989px) and (max-width: 1015px) {
-	.www-footer .work-with-us li:nth-child(4) {
-		clear: both;
-
-		a {
-			@include no-left-line;
-		}
-	}
-}
-
-@media only screen and (min-width: 1015px) {
-	.www-footer .work-with-us li:nth-child(5) {
-		clear: both;
-
-		a {
-			@include no-left-line;
+			transform: translate3d(calc(-#{$spacing * 2} - 1px), 0, 0);
 		}
 	}
 }
