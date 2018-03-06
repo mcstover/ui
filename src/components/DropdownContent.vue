@@ -11,11 +11,14 @@
 
 <script>
 export default {
-	props: ['name'],
+	props: {
+		name: { type: String, required: true }
+	},
 };
 </script>
 
 <style lang="scss">
-@import 'settings';
-@import 'foundation/components/dropdown';
+// @import 'settings';
+// @import 'foundation';
+// @include foundation-dropdown;
 </style>
