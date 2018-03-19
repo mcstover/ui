@@ -44,7 +44,9 @@ module.exports = function createMiddleware({ serverBundle, clientManifest, confi
 		const context = {
 			url: req.url,
 			config: {
-				graphqlUri: config.server.graphqlUri
+				graphqlUri: config.server.graphqlUri,
+				gtmInclude: config.client.gtmInclude,
+				gtmNoScript: config.client.gtmNoScript,
 			},
 			cookies,
 		};

@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+		{{{ config.gtmInclude }}}
 		{{{ meta.inject().meta.text() }}}
 		{{{ meta.inject().link.text() }}}
 		{{{ meta.inject().title.text() }}}
@@ -13,6 +14,7 @@
 	</head>
 	<body>
 		<!--vue-ssr-outlet-->
+		{{{ config.gtmNoScript }}}
 		{{{ renderedState }}}
 		{{{ renderScripts() }}}
 	</body>
