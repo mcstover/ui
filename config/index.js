@@ -1,5 +1,6 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 var path = require('path')
+var templateIncludes = require('../server/util/build3rdPartyScripts.js')
 
 module.exports = {
 	server: {
@@ -40,5 +41,13 @@ module.exports = {
 		// In our experience, they generally work as expected,
 		// just be aware of this issue when enabling this option.
 		cssSourceMap: false
-	}
+	},
+	/*
+	 * 3rd Party Provided Scripts ONLY
+	 * Add these to the appropriate place in the index.template.html file
+	 */
+	templateIncludes: {
+		gtmInclude: templateIncludes.buildGTMInclude(),
+		gtmNoScript: templateIncludes.buildGTMNoScript(),
+	},
 }
