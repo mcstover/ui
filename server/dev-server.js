@@ -12,20 +12,18 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const vueMiddleware = require('./vue-middleware');
 const serverConfig = require('../build/webpack.server.conf');
 const clientConfig = require('../build/webpack.client.dev.conf');
-const conf = require('../config');
-// Import Middleware for Exposing server routes
-const serverRoutes = require('./available-routes-middleware');
+const argv = require('minimist')(process.argv.slice(2));
+const config = require('../config/selectConfig')(argv.config || 'dev-vm');
 
 // app init
-const port = process.env.PORT || conf.dev.port;
+const port = argv.port || config.server.port;
 const app = express();
 
 // webpack setup
 const clientCompiler = webpack(clientConfig);
 const serverCompiler = webpack(serverConfig);
 const devMiddleware = webpackDevMiddleware(clientCompiler, {
-	noInfo: true,
-	quiet: true,
+	logLevel: 'silent',
 	stats: false,
 	publicPath: clientConfig.output.publicPath,
 	// serverSideRender: true,
@@ -55,7 +53,8 @@ const updateHandler = () => {
 	if (clientManifest && serverBundle) {
 		handler = vueMiddleware({
 			clientManifest,
-			serverBundle
+			serverBundle,
+			config,
 		});
 		resolveHandlerReady();
 	}
@@ -91,9 +90,6 @@ serverCompiler.watch({}, (err, rawStats) => {
 	serverBundle = JSON.parse(readFile(mfs, 'vue-ssr-server-bundle.json'));
 	updateHandler();
 });
-
-// Apply serverRoutes middleware to expose available routes
-app.use('/available-routes', serverRoutes);
 
 // install dev/hot middleware
 app.use(devMiddleware);
