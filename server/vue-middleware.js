@@ -3,6 +3,7 @@ const path = require('path');
 const cookie = require('cookie');
 const { createBundleRenderer } = require('vue-server-renderer');
 const getGqlFragmentTypes = require('./util/getGqlFragmentTypes');
+const getInitialSession = require('./util/getInitialSession');
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -43,6 +44,20 @@ module.exports = function createMiddleware({ serverBundle, clientManifest, confi
 		});
 
 		const cookies = cookie.parse(req.headers.cookie || '');
+
+		console.log('current cookie data:');
+		console.log(cookies);
+		if (!cookies.kv) {
+			getInitialSession(config.app.graphqlUri)
+				.then(data => {
+					console.log(data);
+					cookies.kv = data;
+				})
+				.catch(error => {
+					console.log(error);
+				});
+		}
+		console.log(cookies);
 
 		const context = {
 			url: req.url,
